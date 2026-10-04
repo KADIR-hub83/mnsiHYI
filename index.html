@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYI.AI | MNSI Phase I — Maternal & Newborn Health</title>
+  <link rel="icon" type="image/png" href="hyi-logo.png">
+  <link rel="apple-touch-icon" href="hyi-logo.png">
+<style>
+:root{
+  --primary:#6B45E8;
+  --primary-dark:#5132C7;
+  --primary-soft:#EEE9FF;
+  --health-blue:#247BA0;
+  --health-teal:#2A9D8F;
+  --navy:#24304A;
+  --bg:#F7F7FC;
+  --card:#FFFFFF;
+  --text:#24304A;
+  --muted:#718096;
+  --line:#E2E5EF;
+  --critical:#C62828;
+  --high:#D97706;
+  --medium:#2563EB;
+  --low:#64748B;
+  --success:#16805A;
+  --shadow:0 5px 18px rgba(75,55,150,.08);
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(135deg,#f8f7ff 0%,#f4f9fb 100%);color:var(--text)}
+button,input,select{font:inherit} button{cursor:pointer}
+.app{display:flex;min-height:100vh}.sidebar{width:240px;background:linear-gradient(180deg,var(--primary-dark),var(--primary));color:#fff;padding:20px 14px;position:fixed;inset:0 auto 0 0}
+.brand{font-size:17px;font-weight:800;padding:8px 10px 4px}.brand-logo{width:54px;height:54px;object-fit:contain;background:#fff;border-radius:14px;padding:5px;margin-bottom:10px}.brand small{display:block;font-size:10px;font-weight:400;opacity:.8;margin-top:5px;line-height:1.35}.brand:after{content:"HEALTH • SAFETY • CARE";display:block;font-size:8px;letter-spacing:1.2px;color:#ddd4ff;margin-top:10px}.topbar:before{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,var(--primary),var(--health-teal),var(--health-blue))}
+.nav{margin-top:28px}.nav button{width:100%;border:0;background:transparent;color:#f3efff;text-align:left;padding:12px 13px;border-radius:8px;margin:3px 0}
+.nav button:hover,.nav button.active{background:rgba(255,255,255,.15);color:#fff}.nav span{margin-right:10px}
+.sidebar .role{position:absolute;bottom:18px;left:18px;right:18px;border-top:1px solid rgba(255,255,255,.15);padding-top:14px;font-size:12px;color:#c9d9e4}
+.main{margin-left:240px;flex:1}.topbar{height:64px;background:#fff;border-bottom:3px solid #B9DDE4;display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:sticky;top:0;z-index:5}
+.topbar .title{font-weight:700}.top-actions{display:flex;gap:10px;align-items:center}.iconbtn,.btn{border:1px solid var(--line);background:#fff;padding:8px 12px;border-radius:7px}.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}.btn.danger{background:var(--critical);color:#fff;border-color:var(--critical)}.btn.success{background:var(--success);color:#fff;border-color:var(--success)}
+.content{padding:24px 28px}.page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.page-head h1{font-size:23px;margin:0}.page-head p{margin:4px 0;color:var(--muted);font-size:13px}
+.grid{display:grid;gap:16px}.kpis{grid-template-columns:repeat(6,minmax(0,1fr))}.two{grid-template-columns:1.5fr 1fr}.three{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:17px}.kpi .label{font-size:12px;color:var(--muted)}.kpi .value{font-size:27px;font-weight:800;color:var(--navy);margin-top:8px}.kpi .trend{font-size:11px;color:var(--success);margin-top:4px}
+.section-title{font-size:14px;font-weight:800;margin:0 0 13px}.risk{display:inline-flex;align-items:center;padding:4px 8px;border-radius:99px;font-size:11px;font-weight:700}.risk.critical{background:#fee4e2;color:var(--critical)}.risk.high{background:#fff0d8;color:#a15c00}.risk.medium{background:#e4efff;color:#1d4ed8}.risk.low{background:#e8edf2;color:#475569}.status{font-size:11px;padding:4px 7px;border-radius:5px;background:#eef3f6;color:#405160}
+table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;color:var(--muted);font-weight:700;background:#f7f9fb}th,td{padding:10px 9px;border-bottom:1px solid var(--line);vertical-align:top}tr.clickable:hover{background:#f8fbfd}
+.alert{display:flex;gap:12px;align-items:flex-start;border:1px solid #f3c8c5;background:#FFF7F7;border-left:4px solid var(--critical);padding:12px;border-radius:7px;margin-bottom:10px}.alert b{display:block}.muted{color:var(--muted)}
+.bar{height:9px;background:#e9eef2;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--blue)}
+.timeline{border-left:2px solid #dce5eb;margin-left:7px;padding-left:17px}.event{position:relative;margin:0 0 17px}.event:before{content:"";position:absolute;width:9px;height:9px;background:var(--primary);border-radius:50%;left:-23px;top:4px}.event b{font-size:12px}.event p{margin:3px 0;font-size:11px;color:var(--muted)}
+.search{display:flex;gap:8px;margin-bottom:15px}.search input{flex:1;border:1px solid var(--line);border-radius:7px;padding:9px 11px}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.filters select{border:1px solid var(--line);border-radius:7px;padding:8px;background:#fff}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:9px;font-size:12px}.kv b{color:var(--muted)}
+.tabs{display:flex;gap:5px;border-bottom:1px solid var(--line);margin-bottom:16px}.tabs button{border:0;background:transparent;padding:9px 13px;color:var(--muted)}.tabs button.active{color:var(--primary);font-weight:700;border-bottom:2px solid var(--primary)}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(10,30,45,.42);z-index:20;align-items:center;justify-content:center}.modal-bg.show{display:flex}.modal{width:min(650px,92vw);background:#fff;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.2);padding:22px}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal h2{margin:0;font-size:18px}.modal textarea,.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:7px;margin-top:6px}.modal label{display:block;font-size:12px;color:var(--muted);margin:13px 0}
+.toast{position:fixed;right:22px;bottom:22px;background:linear-gradient(180deg,var(--primary-dark),var(--primary));color:#fff;padding:12px 15px;border-radius:8px;display:none;z-index:30}.toast.show{display:block}
+.mobile{max-width:390px;margin:auto;background:#fff;border:8px solid #243746;border-radius:24px;min-height:600px;overflow:hidden}.mobile .mhead{background:linear-gradient(180deg,var(--primary-dark),var(--primary));color:#fff;padding:15px}.mobile .mcontent{padding:14px}.mnav{display:flex;justify-content:space-around;border-top:1px solid var(--line);padding:10px;font-size:11px}
+@media(max-width:1050px){.kpis{grid-template-columns:repeat(3,1fr)}.two,.three{grid-template-columns:1fr}.sidebar{width:205px}.main{margin-left:205px}}
+@media(max-width:720px){.sidebar{display:none}.main{margin-left:0}.kpis{grid-template-columns:repeat(2,1fr)}.content{padding:15px}.topbar{padding:0 14px}}
+/* ---------- UX layer ---------- */
+.skip-link{position:absolute;left:-9999px;top:8px;background:#fff;color:#24304A;padding:8px 12px;border-radius:6px;z-index:100}
+.skip-link:focus{left:8px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #B9A8FF;outline-offset:2px}
+.helper{font-size:11px;color:var(--muted);margin-top:4px}
+.task-strip{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+.task-chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:11px;color:var(--text)}
+.task-chip b{color:var(--primary)}
+.priority-card{border-left:4px solid var(--primary);background:linear-gradient(90deg,#fbfaff,#fff)}
+.health-banner{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:9px;background:#f0fbf8;border:1px solid #c9eee5;color:#245a51;font-size:12px;margin-bottom:16px}
+.health-banner .heart{font-size:18px;color:var(--health-teal)}
+.stepper{display:flex;gap:6px;align-items:center;margin:0 0 18px}
+.step{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.step .n{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#edf0f4}
+.step.active{color:var(--primary);font-weight:700}.step.active .n{background:var(--primary);color:#fff}
+.step-line{height:1px;flex:1;background:var(--line)}
+.command{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 11px;width:min(430px,45vw)}
+.command input{border:0;outline:0;width:100%;font-size:12px}
+.callout{padding:11px;border-radius:8px;border:1px solid #e7e9ef;background:#fafbfc;font-size:12px}
+@media(max-width:720px){.command{display:none}.task-strip{overflow:auto;flex-wrap:nowrap;padding-bottom:4px}.task-chip{white-space:nowrap}}
+</style>
+</head>
+<body><a class="skip-link" href="#content">Skip to main content</a>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">
+<img src="hyi-logo.png" class="brand-logo" alt="HYI.AI">
+<div>HYI.AI</div>
+<small>MNSI Phase I · Maternal & Newborn Health</small>
+</div>
+  <nav class="nav">
+    <button aria-label="Open dashboard" data-page="dashboard" class="active">▦ Dashboard</button>
+    <button aria-label="Open beneficiary registry" data-page="beneficiaries">◉ Beneficiaries</button>
+    <button aria-label="Open cases and escalation" data-page="cases">⚠ Cases & Escalation</button>
+    <button aria-label="Open referrals" data-page="referrals">⇢ Referrals</button>
+    <button aria-label="Open AI voice and calls" data-page="calls">☎ AI Voice / Calls</button>
+    <button data-page="reports">▤ Reports & Analytics</button>
+    <button data-page="admin">⚙ Administration</button>
+    <button data-page="mobile">▣ Mobile View</button>
+  </nav>
+  <div class="role">Signed in as<br><b>District Operator</b><br>District Shahdol, MP</div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="title" id="topTitle"><span style="color:var(--primary)">♥</span> District Operations Dashboard</div><div class="command"><span>⌕</span><input id="globalSearch" aria-label="Quick search" placeholder="Search beneficiary, case or referral…" onkeydown="if(event.key==='Enter')quickSearch()"></div><div class="top-actions"><button class="iconbtn" onclick="toast('No new notifications')">🔔 3</button><button class="iconbtn" onclick="openModal('profile')">Operator ▾</button></div></header>
+<section class="content" id="content"></section>
+</main>
+</div>
+
+<div class="modal-bg" id="modalBg"><div class="modal" id="modal"></div></div><div class="toast" id="toast"></div>
+
+<script>
+const beneficiaries=[
+{id:"BEN-10482",name:"Sita Bai",age:24,location:"Block A",phc:"PHC Shahdol",risk:"Critical",stage:"Antenatal",phone:"98XXXX1204",last:"2 min ago",case:"CAS-70041"},
+{id:"BEN-10371",name:"Kavita Bai",age:29,location:"Block B",phc:"PHC Burhar",risk:"High",stage:"Antenatal",phone:"97XXXX4421",last:"28 min ago",case:"CAS-70038"},
+{id:"BEN-10290",name:"Rekha Bai",age:22,location:"Block C",phc:"PHC Sohagpur",risk:"Medium",stage:"Post-natal",phone:"99XXXX8112",last:"2 hrs ago",case:"CAS-70031"},
+{id:"BEN-10115",name:"Sunita Bai",age:31,location:"Block A",phc:"PHC Shahdol",risk:"Low",stage:"Antenatal",phone:"96XXXX3009",last:"Yesterday",case:"—"}
+];
+let cases=[
+{id:"CAS-70041",benef:"Sita Bai",risk:"Critical",trigger:"Severe warning signal detected",owner:"Medical Officer",sla:"03:42",status:"Open"},
+{id:"CAS-70038",benef:"Kavita Bai",risk:"High",trigger:"Missed clinical milestone",owner:"Block Coordinator",sla:"1:14:22",status:"Acknowledged"},
+{id:"CAS-70031",benef:"Rekha Bai",risk:"Medium",trigger:"Service-delivery complaint",owner:"Field Worker",sla:"3:05:18",status:"In Progress"},
+{id:"CAS-69988",benef:"Sunita Bai",risk:"Low",trigger:"Routine follow-up",owner:"Field Worker",sla:"Tomorrow",status:"Open"}
+];
+
+function risk(r){return `<span class="risk ${r.toLowerCase()}">${r}</span>`}
+function layout(title,sub,body,actions=""){document.getElementById("topTitle").textContent=title;document.getElementById("content").innerHTML=`<div class="page-head"><div><h1>${title}</h1><p>${sub}</p></div><div>${actions}</div></div>${body}`}
+function navActive(page){document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page))}
+function go(page){navActive(page);pages[page]()}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}
+function openModal(type,data={}){const m=document.getElementById("modal");let h="";
+if(type==="case")h=`<div class="modal-head"><h2>Create Case</h2><button class="iconbtn" onclick="closeModal()">✕</button></div><label>Beneficiary<input value="${data.name||''}" placeholder="Search beneficiary"></label><label>Risk<select><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select></label><label>Trigger<textarea placeholder="Describe detected signal"></textarea></label><div style="text-align:right"><button class="btn" onclick="closeModal()">Cancel</button> <button class="btn primary" onclick="closeModal();toast('Case created and routed')">Create & Route</button></div>`;
+if(type==="profile")h=`<div class="modal-head"><h2>User Profile</h2><button class="iconbtn" onclick="closeModal()">✕</button></div><div class="kv" style="margin-top:18px"><b>User</b><span>District Operator</span><b>District</b><span>Shahdol</span><b>Role</b><span>Operator / Stakeholder</span><b>Access</b><span>Case, beneficiary, referral, reporting</span></div>`;
+if(type==="beneficiary")h=`<div class="modal-head"><h2>Beneficiary 360</h2><button class="iconbtn" onclick="closeModal()">✕</button></div><div style="margin-top:15px">${beneficiaryDetail(data)}</div>`;
+document.getElementById("modal").innerHTML=h;document.getElementById("modalBg").classList.add("show")}
+function closeModal(){document.getElementById("modalBg").classList.remove("show")}
+
+function beneficiaryDetail(b){return `<div class="card" style="box-shadow:none"><div style="display:flex;justify-content:space-between"><div><b style="font-size:17px">${b.name}</b><div class="muted">${b.id} · ${b.age} yrs · ${b.location}</div></div>${risk(b.risk)}</div><hr style="border:0;border-top:1px solid var(--line);margin:14px 0"><div class="kv"><b>Phone</b><span>${b.phone}</span><b>Stage</b><span>${b.stage}</span><b>PHC</b><span>${b.phc}</span><b>Last Contact</b><span>${b.last}</span><b>Open Case</b><span>${b.case}</span></div></div>`}
+
+const pages={
+dashboard(){
+layout("District Operations Dashboard","Maternal & Newborn Safety Initiative · Shahdol",`<div class="health-banner"><span class="heart">♥</span><span><b>Good morning, Operator.</b> Start with the most urgent actions. Confirm patient-facing actions before escalation.</span></div><div class="task-strip"><span class="task-chip"><b>6</b> critical cases</span><span class="task-chip"><b>11</b> overdue</span><span class="task-chip"><b>8</b> referrals awaiting outcome</span><span class="task-chip"><b>132</b> calls pending</span></div>
+<div class="grid kpis">
+${[['Total Beneficiaries','1,248','+4.2%'],['Critical','18','Needs action'],['High','76','12 new today'],['Open Cases','143','31 due today'],['Overdue','11','Escalate now'],['Referrals','27','8 awaiting outcome']].map(x=>`<div class="card kpi"><div class="label">♥ ${x[0]}</div><div class="value">${x[1]}</div><div class="trend">${x[2]}</div></div>`).join('')}
+</div>
+<div class="grid two" style="margin-top:16px">
+<div class="card"><h3 class="section-title">Critical / High Risk Queue</h3>
+${cases.slice(0,3).map(c=>`<div class="alert"><div style="flex:1"><b>${c.benef} · ${c.id}</b><span>${risk(c.risk)} &nbsp; ${c.trigger}</span><div class="muted" style="margin-top:5px">Owner: ${c.owner} · SLA: ${c.sla}</div></div><button class="btn danger" onclick="go('cases')">Open</button></div>`).join('')}
+</div>
+<div class="card"><h3 class="section-title">Today's Performance</h3>
+<div class="muted">Outbound contactability</div><div class="bar" style="margin:7px 0 13px"><i style="width:90%"></i></div><b>90%</b>
+<div class="muted" style="margin-top:15px">Case acknowledgement</div><div class="bar" style="margin:7px 0 13px"><i style="width:84%"></i></div><b>84%</b>
+<div class="muted" style="margin-top:15px">Referral closure</div><div class="bar" style="margin:7px 0 13px"><i style="width:71%"></i></div><b>71%</b>
+</div></div>
+<div class="grid three" style="margin-top:16px">
+<div class="card"><h3 class="section-title">Risk Trend</h3><div style="font-size:12px">Mon ▂ Tue ▃ Wed ▅ Thu ▄ Fri ▆ Sat ▇ Sun ▆</div></div>
+<div class="card"><h3 class="section-title">Calls Due</h3><b style="font-size:24px">214</b><div class="muted">82 completed · 132 pending</div></div>
+<div class="card"><h3 class="section-title">Quick Actions</h3><button class="btn primary" onclick="openModal('case')">+ Create Case</button> <button class="btn" onclick="go('beneficiaries')">Search</button></div>
+</div>`,"<button class='btn primary' onclick=\"go('beneficiaries')\">Search Beneficiary</button>");
+},
+beneficiaries(){
+layout("Beneficiary Registry","Find a beneficiary quickly, then take the safest next action.","<div class='health-banner'><span class='heart'>♥</span><span><b>Privacy first:</b> only open records you need for the current task.</span></div><div class='search'><input id='bsearch' placeholder='Search name, beneficiary ID or mobile' oninput='filterBeneficiaries()'><button class='btn primary' onclick=\"toast('Search executed')\">Search</button></div><div class='filters'><select id='riskfilter' onchange='filterBeneficiaries()'><option value=''>All Risk</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select><select><option>All Blocks</option><option>Block A</option><option>Block B</option><option>Block C</option></select><select><option>All Stages</option><option>Antenatal</option><option>Post-natal</option></select><button class='btn' onclick=\"toast('Export prepared')\">Export</button></div><div class='card'><table><thead><tr><th>ID</th><th>Beneficiary</th><th>Stage</th><th>Risk</th><th>PHC</th><th>Last Contact</th><th>Case</th><th></th></tr></thead><tbody id='benefRows'></tbody></table></div>");
+filterBeneficiaries();
+},
+cases(){
+layout("Cases & Escalation","Work from urgent cases first. Every case shows owner, next action and response clock.","<div class='task-strip'><span class='task-chip'><b>1</b> Immediate action</span><span class='task-chip'><b>7</b> Acknowledge today</span><span class='task-chip'><b>3</b> Escalate overdue</span></div><div class='filters'><select><option>All Risk</option><option>Critical</option><option>High</option></select><select><option>All Status</option><option>Open</option><option>Acknowledged</option><option>In Progress</option></select><button class='btn' onclick=\"toast('Filters applied')\">Apply</button><button class='btn primary' onclick=\"openModal('case')\">+ Create Case</button></div><div class='card'><table><thead><tr><th>Case</th><th>Beneficiary</th><th>Risk</th><th>Trigger</th><th>Owner</th><th>SLA</th><th>Status</th><th>Action</th></tr></thead><tbody>${cases.map((c,i)=>`<tr><td><b>${c.id}</b></td><td>${c.benef}</td><td>${risk(c.risk)}</td><td>${c.trigger}</td><td>${c.owner}</td><td><b>${c.sla}</b></td><td>${c.status}</td><td><button class='btn' onclick='caseDetail(${i})'>View</button></td></tr>`).join('')}</tbody></table></div>");
+},
+referrals(){
+layout("Emergency Referrals","Track readiness from referral creation to confirmed outcome.","<div class='health-banner'><span class='heart'>♥</span><span><b>Referral workflow:</b> Notify → Acknowledge → En route → Service received → Close.</span></div><div class='grid kpis' style='grid-template-columns:repeat(4,1fr)'><div class='card kpi'><div class='label'>Open Referrals</div><div class='value'>27</div></div><div class='card kpi'><div class='label'>Critical</div><div class='value'>6</div></div><div class='card kpi'><div class='label'>Awaiting Outcome</div><div class='value'>8</div></div><div class='card kpi'><div class='label'>Overdue</div><div class='value'>3</div></div></div><div class='card' style='margin-top:16px'><table><thead><tr><th>Referral</th><th>Beneficiary</th><th>Risk</th><th>Destination</th><th>Notification</th><th>Status</th><th></th></tr></thead><tbody>${[['REF-4401','Sita Bai','Critical','District Hospital','Acknowledged','En Route'],['REF-4398','Kavita Bai','High','PHC Burhar','Sent','Awaiting Outcome'],['REF-4387','Rekha Bai','Medium','PHC Sohagpur','Sent','Closed']].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${risk(r[2])}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td><button class='btn' onclick=\"toast('Referral detail opened')\">View</button></td></tr>`).join('')}</tbody></table></div>");
+},
+calls(){
+layout("AI Voice / Call Console","Keep the conversation simple: identify → listen → detect → confirm → route.","<div class='stepper'><div class='step active'><span class='n'>1</span>Identify</div><span class='step-line'></span><div class='step active'><span class='n'>2</span>Listen</div><span class='step-line'></span><div class='step active'><span class='n'>3</span>Detect</div><span class='step-line'></span><div class='step'><span class='n'>4</span>Confirm</div><span class='step-line'></span><div class='step'><span class='n'>5</span>Route</div></div><div class='grid two'><div class='card'><h3 class='section-title'>Current Call</h3><div style='font-size:18px;font-weight:800'>Sita Bai · BEN-10482</div><div class='muted'>Connected · Hindi · Attempt #2</div><div class='card' style='margin-top:15px;background:#f7fafc;box-shadow:none'><b>Approved script</b><p style='font-size:12px'>“Namaste. This is the MNSI health support service. We are checking on your wellbeing. Are you experiencing any urgent concern?”</p><div style='display:flex;gap:8px;flex-wrap:wrap'><span class='status'>Connected</span><span class='status'>Danger signal</span><span class='status'>Case trigger</span></div></div><div style='margin-top:15px'><button class='btn danger' onclick=\"toast('Emergency case created and routed')\">Escalate</button> <button class='btn' onclick=\"toast('Call marked for retry')\">Retry</button> <button class='btn success' onclick=\"toast('Call completed')\">Complete</button></div></div><div class='card'><h3 class='section-title'>Interaction Summary</h3><div class='timeline'><div class='event'><b>10:42 · Call connected</b><p>Language detected: Hindi</p></div><div class='event'><b>10:43 · Signal detected</b><p>Potential urgent warning signal</p></div><div class='event'><b>10:44 · Case created</b><p>CAS-70041 routed to Medical Officer</p></div></div></div></div>");
+},
+reports(){
+layout("Reports & Analytics","District performance, risk, contactability and referral analytics.","<div class='grid three'><div class='card'><h3 class='section-title'>Risk by Block</h3><p>Block A · 42 critical/high</p><div class='bar'><i style='width:76%'></i></div><p>Block B · 31</p><div class='bar'><i style='width:56%'></i></div><p>Block C · 21</p><div class='bar'><i style='width:39%'></i></div></div><div class='card'><h3 class='section-title'>Response Performance</h3><div class='kv'><b>Critical response</b><span>92% within target</span><b>Case acknowledgement</b><span>84% within target</span><b>Contactability</b><span>90%</span><b>Referral closure</b><span>71%</span></div></div><div class='card'><h3 class='section-title'>Reports</h3><button class='btn' onclick=\"toast('Daily risk report generated')\">Daily Risk</button><br><br><button class='btn' onclick=\"toast('Referral report generated')\">Referral Report</button><br><br><button class='btn' onclick=\"toast('Audit export generated')\">Audit Export</button></div></div><div class='card' style='margin-top:16px'><h3 class='section-title'>7-Day Operational Trend</h3><div style='height:170px;display:flex;align-items:end;gap:10px'>${[35,55,48,72,62,84,70].map((h,i)=>`<div style='flex:1;text-align:center'><div style='height:${h}px;background:var(--health-blue);border-radius:5px 5px 0 0'></div><small>${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i]}</small></div>`).join('')}</div></div>");
+},
+admin(){
+layout("Administration","Configure roles, routing, risk taxonomy, calling rules and notifications.","<div class='tabs'><button class='active'>Users & Roles</button><button onclick=\"toast('Routing Matrix selected')\">Routing Matrix</button><button onclick=\"toast('Risk Taxonomy selected')\">Risk Taxonomy</button><button onclick=\"toast('Calling Rules selected')\">Calling Rules</button><button onclick=\"toast('Notifications selected')\">Notifications</button><button onclick=\"toast('Audit selected')\">Audit</button></div><div class='grid two'><div class='card'><h3 class='section-title'>Routing Matrix</h3><table><tr><th>Risk</th><th>Assigned Role</th><th>Channel</th><th>SLA</th></tr><tr><td>${risk('Critical')}</td><td>Medical Officer</td><td>Voice + WhatsApp</td><td>5 min</td></tr><tr><td>${risk('High')}</td><td>Block Coordinator</td><td>Voice + WhatsApp</td><td>2 hr</td></tr><tr><td>${risk('Medium')}</td><td>Field Worker</td><td>Voice/SMS</td><td>1 day</td></tr><tr><td>${risk('Low')}</td><td>Field Worker</td><td>Scheduled call</td><td>Routine</td></tr></table></div><div class='card'><h3 class='section-title'>Calling Rules</h3><div class='kv'><b>Calling window</b><span>09:00–18:00</span><b>Retry count</b><span>3</span><b>Cooldown</b><span>24 hours</span><b>Suppression</b><span>After successful contact</span><b>Emergency exception</b><span>Enabled</span></div><br><button class='btn primary' onclick=\"toast('Configuration saved')\">Save Configuration</button></div></div>");
+},
+mobile(){
+layout("Mobile Field / Stakeholder View","Compact mobile workflow for field and stakeholder users.","<div class='mobile'><div class='mhead'><b>MNSI</b><span style='float:right'>🔔</span><div style='font-size:11px;opacity:.8'>District Shahdol</div></div><div class='mcontent'><div class='card' style='box-shadow:none;background:#FFF7F7;border-color:#f3c8c5'><b>6 Critical cases</b><div class='muted'>Immediate attention required</div><br><button class='btn danger' onclick=\"go('cases')\">Open Queue</button></div><h3 class='section-title' style='margin-top:16px'>My Queue</h3><div class='card' style='box-shadow:none;margin-bottom:8px'><b>Sita Bai</b><div>${risk('Critical')} <span class='muted'>CAS-70041</span></div><br><button class='btn' onclick=\"toast('Call started')\">☎ Call</button> <button class='btn' onclick=\"go('cases')\">Case</button></div><div class='card' style='box-shadow:none'><b>Kavita Bai</b><div>${risk('High')} <span class='muted'>CAS-70038</span></div><br><button class='btn' onclick=\"toast('Case updated')\">Update</button></div></div><div class='mnav'><span>⌂ Home</span><span>◉ Beneficiaries</span><span>⚠ Cases</span><span>⇢ Referrals</span></div></div>");
+}
+};
+
+function quickSearch(){
+ const q=(document.getElementById('globalSearch')?.value||'').trim();
+ if(!q){toast('Type a beneficiary, case or referral');return}
+ go('beneficiaries');
+ setTimeout(()=>{const el=document.getElementById('bsearch');if(el){el.value=q;filterBeneficiaries()}},30);
+}
+function filterBeneficiaries(){
+ const q=(document.getElementById('bsearch')?.value||'').toLowerCase();
+ const rf=document.getElementById('riskfilter')?.value||'';
+ const rows=beneficiaries.filter(b=>(!q||JSON.stringify(b).toLowerCase().includes(q))&&(!rf||b.risk===rf));
+ const el=document.getElementById('benefRows'); if(!el)return;
+ el.innerHTML=rows.map(b=>`<tr class='clickable'><td>${b.id}</td><td><b>${b.name}</b><div class='muted'>${b.age} yrs · ${b.location}</div></td><td>${b.stage}</td><td>${risk(b.risk)}</td><td>${b.phc}</td><td>${b.last}</td><td>${b.case}</td><td><button class='btn' onclick='openModal("beneficiary",${JSON.stringify(b).replace(/"/g,"&quot;")})'>View</button></td></tr>`).join('');
+}
+function caseDetail(i){
+ const c=cases[i];
+ layout("Case Detail",`${c.id} · ${c.benef} · ${c.trigger}`,`<div class='grid two'><div class='card priority-card'><div style='display:flex;justify-content:space-between'><h3 class='section-title'>Next best action</h3>${risk(c.risk)}</div><div class='callout'><b>Acknowledge and review the trigger before the SLA expires.</b><div class='helper'>Owner: ${c.owner} · Remaining: ${c.sla}</div></div><br><h3 class='section-title'>Case Summary</h3><div class='kv'><b>Case ID</b><span>${c.id}</span><b>Beneficiary</b><span>${c.benef}</span><b>Owner</b><span>${c.owner}</span><b>Status</b><span>${c.status}</span><b>SLA</b><span><b>${c.sla}</b></span></div><br><button class='btn primary' onclick=\"toast('Case acknowledged')\">Acknowledge</button> <button class='btn danger' onclick=\"toast('Case escalated')\">Escalate</button> <button class='btn success' onclick=\"toast('Case resolved')\">Resolve</button></div><div class='card'><h3 class='section-title'>Case Timeline</h3><div class='timeline'><div class='event'><b>10:42 · Created</b><p>Signal detected by AI voice interaction</p></div><div class='event'><b>10:43 · Routed</b><p>Assigned to ${c.owner}</p></div><div class='event'><b>10:44 · Awaiting action</b><p>SLA countdown active</p></div></div></div></div><div class='card' style='margin-top:16px'><h3 class='section-title'>Add Case Note / Action</h3><textarea style='width:100%;min-height:90px;border:1px solid var(--line);border-radius:7px;padding:10px' placeholder='Enter action, remarks or supporting information'></textarea><br><br><button class='btn primary' onclick=\"toast('Case note added to audit trail')\">Add Note</button></div>`);
+}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
+document.getElementById('modalBg').addEventListener('click',e=>{if(e.target.id==='modalBg')closeModal()});
+go('dashboard');
+</script>
+</body>
+</html>
